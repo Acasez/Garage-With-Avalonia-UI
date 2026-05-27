@@ -16,13 +16,23 @@
     </Design.DataContext>
 
     <StackPanel>
-        <TextBlock 
-            Margin="5"
-            FontSize="24" 
-            HorizontalAlignment="Center"
-            Text="Temperature Converter">
-        </TextBlock>
-        <Button>Calculate</Button>
+        <Border Margin="5" CornerRadius="10" Background="LightBlue">
+            <TextBlock Margin="5"
+                       FontSize="24" 
+                       HorizontalAlignment="Center"
+                       Text="Temperature Converter">
+            </TextBlock>
+        </Border>
+        <Grid 
+            ShowGridLines="True" Margin="5" 
+            ColumnDefinitions="120, 100"
+            RowDefinitions="Auto, Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="10">Celsius</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Text="0"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="10">Fahrenheit</TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Text="0"/>
+        </Grid>
+        <Button HorizontalAlignment="Center">Calculate</Button>
     </StackPanel>
 
 </Window>
