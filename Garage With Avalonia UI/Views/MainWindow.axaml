@@ -20,7 +20,7 @@
             <TextBlock Margin="5"
                        FontSize="24" 
                        HorizontalAlignment="Center"
-                       Text="Temperature Converter">
+                       Text="Garage">
             </TextBlock>
         </Border>
         <Grid 
