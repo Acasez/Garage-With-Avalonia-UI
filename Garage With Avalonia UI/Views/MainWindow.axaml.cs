@@ -23,4 +23,23 @@ public partial class MainWindow : Window
             Fahrenheit.Text = "0";
         }
     }
+
+
+    private void Celcius_TextChanged(object? sender, TextChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(Celsius.Text) || Celsius.Text == "-")
+        {
+            Fahrenheit.Text = "";
+        }
+        else if (double.TryParse(Celsius.Text, out double C))
+        {
+            var F = C * (9d / 5d) + 32;
+            Fahrenheit.Text = F.ToString("0.0");
+        }
+        else
+        {
+            Celsius.Text = "0";
+            Fahrenheit.Text = "0";
+        }
+    }
 }

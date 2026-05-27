@@ -24,15 +24,14 @@
             </TextBlock>
         </Border>
         <Grid 
-            ShowGridLines="True" Margin="5" 
+            ShowGridLines="False" Margin="5" 
             ColumnDefinitions="120, 100"
             RowDefinitions="Auto, Auto">
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10">Celsius</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Text="0" Name="Celsius"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Text="0" Name="Celsius" TextChanged="Celcius_TextChanged"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="10">Fahrenheit</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Text="0" Name="Fahrenheit"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Text="0" Name="Fahrenheit" IsReadOnly="True"/>
         </Grid>
-        <Button HorizontalAlignment="Center" Click="Button_OnClick">Calculate</Button>
     </StackPanel>
 
 </Window>
