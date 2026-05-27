@@ -10,6 +10,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
     private bool isUpdating = false;
 
     private void Celcius_TextChanged(object? sender, TextChangedEventArgs e)
