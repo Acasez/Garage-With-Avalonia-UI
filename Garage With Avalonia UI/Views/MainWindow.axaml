@@ -17,21 +17,16 @@
 
     <StackPanel>
         <Border Margin="5" CornerRadius="10" Background="LightBlue">
-            <TextBlock Margin="5"
-                       FontSize="24" 
-                       HorizontalAlignment="Center"
-                       Text="Garage">
-            </TextBlock>
+            <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
         </Border>
-        <Grid 
-            ShowGridLines="False" Margin="5" 
-            ColumnDefinitions="120, 100"
-            RowDefinitions="Auto, Auto">
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="10">Celsius</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Text="0" Name="Celsius" TextChanged="Celcius_TextChanged"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Margin="10">Fahrenheit</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Text="0" Name="Fahrenheit" TextChanged="Fahrenheit_TextChanged"/>
-        </Grid>
+        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Instructions}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid ShowGridLines="False" Margin="5" 
+              ColumnDefinitions="120, 100"
+              RowDefinitions="Auto, Auto">
+            <TextBox Grid.Row="0" Grid.Column="0" Margin="0 5" Text="0" Name="Spaces"/>
+            <Button Grid.Row="0" Grid.Column="1" Click="Button_OnClick">Build Garage</Button>
+        </Grid>   
     </StackPanel>
 
 </Window>
