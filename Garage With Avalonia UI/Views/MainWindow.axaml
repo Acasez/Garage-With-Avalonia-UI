@@ -28,11 +28,11 @@
             ColumnDefinitions="120, 100"
             RowDefinitions="Auto, Auto">
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10">Celsius</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Text="0"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Text="0" Name="Celsius"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="10">Fahrenheit</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Text="0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Text="0" Name="Fahrenheit"/>
         </Grid>
-        <Button HorizontalAlignment="Center">Calculate</Button>
+        <Button HorizontalAlignment="Center" Click="Button_OnClick">Calculate</Button>
     </StackPanel>
 
 </Window>

@@ -1,7 +1,9 @@
-﻿namespace Garage_With_Avalonia_UI.ViewModels
+﻿using Avalonia.Interactivity;
+using System.Diagnostics;
+namespace Garage_With_Avalonia_UI.ViewModels;
+
+public partial class MainWindowViewModel : ViewModelBase
 {
-    public partial class MainWindowViewModel : ViewModelBase
-    {
-        public string Greeting { get; } = "Welcome to Avalonia!";
-    }
+    public string Greeting { get; } = "Welcome to Avalonia!";
+
 }
