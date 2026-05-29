@@ -216,6 +216,11 @@ namespace CSharp_Garage_Task
             }
         }
 
+        public Vehicle GetFirstVehicle()
+        {
+            return (Vehicle)Garage.Take(1);
+        }
+
         public void ListAllVehiclesFilterable()
         {
             VehicleTypes? typeFilter = null;

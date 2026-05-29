@@ -18,6 +18,8 @@ internal interface IHandler
     void AddVehicle();
     List<int> GetLargestEmptyLot();
 
+    Vehicle GetFirstVehicle();
+
     #region Filters
     internal static VehicleColors GetVehicleColor()
     {
