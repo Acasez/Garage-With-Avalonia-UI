@@ -77,7 +77,7 @@ public partial class MainWindow : Window
                 grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 var emptyText = new TextBlock
                 {
-                    Text = $"{currentNullSpaces.ToCustomString()} - No vehicles parked",
+                    Text = currentNullSpaces.ToCustomString() + "- No vehicles parked",
                     Margin = new Thickness(0, 5, 0, 5)
                 };
                 Grid.SetRow(emptyText, rowIndex);
@@ -148,7 +148,7 @@ public partial class MainWindow : Window
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             var emptyText = new TextBlock
             {
-                Text = $"{currentNullSpaces.ToCustomString()} - No vehicles parked",
+                Text = currentNullSpaces.ToCustomString() + " - No vehicles parked",
                 Margin = new Thickness(0, 5, 0, 5)
             };
             Grid.SetRow(emptyText, rowIndex);
