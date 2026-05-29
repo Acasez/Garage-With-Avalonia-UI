@@ -16,10 +16,10 @@
     </Design.DataContext>
 
     <StackPanel Name="Base">
-        <StackPanel Name="GarageCreation">
-            <Border Margin="5" CornerRadius="10" Background="LightBlue">
+        <Border Margin="5" CornerRadius="10" Background="LightBlue">
                 <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
             </Border>
+        <StackPanel Name="GarageCreation">
             <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Instructions}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Grid ShowGridLines="False" Margin="5" 
@@ -30,7 +30,7 @@
             </Grid>
         </StackPanel>
         <StackPanel Name="Garage" IsVisible="False">
-             <TextBlock Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+             <TextBlock Name="GarageSpaceCount" Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
     </StackPanel>
     

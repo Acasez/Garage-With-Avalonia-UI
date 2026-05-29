@@ -29,5 +29,6 @@ public partial class MainWindow : Window
         bool looping = handler.CreateGarage(garageSpaces);
         GarageCreation.IsVisible = false;
         Garage.IsVisible = true;
+        GarageSpaceCount.Text = "The garage has " + garageSpaces + " spaces";
     }
 }
