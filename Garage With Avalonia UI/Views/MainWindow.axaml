@@ -41,6 +41,29 @@
         <StackPanel Name="VehicleListGrid" IsVisible="True">
             <!--Here be grid -->
         </StackPanel>
+        <StackPanel Name="AddVehicleSetup" IsVisible="False">
+            <StackPanel Name="VehicleInputs" Orientation="Horizontal">
+                <ComboBox Name="VehicleType" SelectedIndex="0">
+                    <ComboBoxItem>Car</ComboBoxItem>
+                    <ComboBoxItem>Motorcycle</ComboBoxItem>
+                    <ComboBoxItem>Bus</ComboBoxItem>
+                    <ComboBoxItem>Boat</ComboBoxItem>
+                    <ComboBoxItem>Airplane</ComboBoxItem>
+                </ComboBox>
+                <TextBox Text="Name Here" Name="VehicleName"/>
+                <TextBox Text="ID Here" Name="VehicleID"/>
+                <ComboBox Name="VehicleColor" SelectedIndex="0">
+                    <ComboBoxItem>White</ComboBoxItem>
+                    <ComboBoxItem>Black</ComboBoxItem>
+                    <ComboBoxItem>Red</ComboBoxItem>
+                    <ComboBoxItem>Blue</ComboBoxItem>
+                    <ComboBoxItem>Green</ComboBoxItem>
+                    <ComboBoxItem>Silver</ComboBoxItem>
+                    <ComboBoxItem>Yellow</ComboBoxItem>
+                </ComboBox>
+                <Button Click="Button_Add">Add Vehicle</Button>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
     
 

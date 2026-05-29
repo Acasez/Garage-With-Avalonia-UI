@@ -39,6 +39,7 @@ public partial class MainWindow : Window
     private void Button_Add(object? sender, RoutedEventArgs e)
     {
         Debug.WriteLine("Adding vehicle");
+        AddVehicleSetup.IsVisible = true;
     }
     private void Button_List(object? sender, RoutedEventArgs e)
     {
