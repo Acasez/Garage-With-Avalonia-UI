@@ -32,11 +32,21 @@
         <StackPanel Name="Garage" IsVisible="False">
              <TextBlock Name="GarageSpaceCount" Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Name="OptionList" Orientation="Horizontal">
                 <Button Click="Button_List">List Vehicles</Button>
                 <Button Click="Button_Add">Add Vehicle</Button>
                 <Button Click="Button_Find">Find Vehicle</Button>
             </StackPanel>
+        </StackPanel>
+        <StackPanel Name="VehicleListGrid" IsVisible="True">
+             <Grid ShowGridLines="True" Margin="5" 
+                  ColumnDefinitions="Auto, Auto, Auto, Auto"
+                  RowDefinitions="Auto, Auto">
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="5 5" Text="Vehicle 1" Name="ID"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 5" Text="Car" Name="VehicleType"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="5 5" Text="Red" Name="Color"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Margin="5 5" Text="CarCar" Name="Name"/>
+            </Grid>
         </StackPanel>
     </StackPanel>
     
