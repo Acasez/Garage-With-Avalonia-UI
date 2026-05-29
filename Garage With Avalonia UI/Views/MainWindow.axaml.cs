@@ -96,7 +96,7 @@ public partial class MainWindow : Window
                 var spacesText = new TextBlock
                 {
                     Text = handler.Garage.Vehicles[i].parkSpacesOccupied.ToCustomString(),
-                    Margin = new Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(5, 5, 5, 5)
                 };
                 Grid.SetRow(spacesText, rowIndex);
                 Grid.SetColumn(spacesText, 0);
@@ -106,7 +106,7 @@ public partial class MainWindow : Window
                 var typeText = new TextBlock
                 {
                     Text = handler.Garage.Vehicles[i].VehicleType.ToString(),
-                    Margin = new Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(5, 5, 5, 5)
                 };
                 Grid.SetRow(typeText, rowIndex);
                 Grid.SetColumn(typeText, 1);
@@ -116,7 +116,7 @@ public partial class MainWindow : Window
                 var colorText = new TextBlock
                 {
                     Text = handler.Garage.Vehicles[i].Color.ToString(),
-                    Margin = new Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(5, 5, 5, 5)
                 };
                 Grid.SetRow(colorText, rowIndex);
                 Grid.SetColumn(colorText, 2);
@@ -125,8 +125,8 @@ public partial class MainWindow : Window
                 // Name + ID
                 var nameIdText = new TextBlock
                 {
-                    Text = $"{handler.Garage.Vehicles[i].Name} (ID: {handler.Garage.Vehicles[i].RegisterID})",
-                    Margin = new Thickness(0, 5, 0, 5)
+                    Text = handler.Garage.Vehicles[i].Name + " (ID: + " + handler.Garage.Vehicles[i].RegisterID + ")",
+                    Margin = new Thickness(5, 5, 5, 5)
                 };
                 Grid.SetRow(nameIdText, rowIndex);
                 Grid.SetColumn(nameIdText, 3);
