@@ -31,4 +31,17 @@ public partial class MainWindow : Window
         Garage.IsVisible = true;
         GarageSpaceCount.Text = "The garage has " + garageSpaces + " spaces";
     }
+
+    private void Button_Add(object? sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("Adding vehicle");
+    }
+    private void Button_List(object? sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("Listing vehicles");
+    }
+    private void Button_Find(object? sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("Find vehicle");
+    }
 }

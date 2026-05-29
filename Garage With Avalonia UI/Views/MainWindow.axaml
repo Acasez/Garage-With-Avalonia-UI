@@ -31,6 +31,12 @@
         </StackPanel>
         <StackPanel Name="Garage" IsVisible="False">
              <TextBlock Name="GarageSpaceCount" Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Click="Button_List">List Vehicles</Button>
+                <Button Click="Button_Add">Add Vehicle</Button>
+                <Button Click="Button_Find">Find Vehicle</Button>
+            </StackPanel>
         </StackPanel>
     </StackPanel>
     
