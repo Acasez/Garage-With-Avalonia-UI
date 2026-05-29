@@ -15,18 +15,24 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <StackPanel>
-        <Border Margin="5" CornerRadius="10" Background="LightBlue">
-            <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
-        </Border>
-        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="{Binding Instructions}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Grid ShowGridLines="False" Margin="5" 
-              ColumnDefinitions="120, 100"
-              RowDefinitions="Auto, Auto">
-            <TextBox Grid.Row="0" Grid.Column="0" Margin="0 5" Text="0" Name="Spaces"/>
-            <Button Grid.Row="0" Grid.Column="1" Click="Button_OnClick">Build Garage</Button>
-        </Grid>   
+    <StackPanel Name="Base">
+        <StackPanel Name="GarageCreation">
+            <Border Margin="5" CornerRadius="10" Background="LightBlue">
+                <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
+            </Border>
+            <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Instructions}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Grid ShowGridLines="False" Margin="5" 
+                  ColumnDefinitions="120, 100"
+                  RowDefinitions="Auto, Auto">
+                <TextBox Grid.Row="0" Grid.Column="0" Margin="0 5" Text="0" Name="Spaces"/>
+                <Button Grid.Row="0" Grid.Column="1" Click="Button_OnClick">Build Garage</Button>
+            </Grid>
+        </StackPanel>
+        <StackPanel Name="Garage" IsVisible="False">
+             <TextBlock Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
     </StackPanel>
+    
 
 </Window>

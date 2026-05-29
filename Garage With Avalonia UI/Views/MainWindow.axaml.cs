@@ -27,5 +27,7 @@ public partial class MainWindow : Window
         IHandler handler = new GarageHandler();
 
         bool looping = handler.CreateGarage(garageSpaces);
+        GarageCreation.IsVisible = false;
+        Garage.IsVisible = true;
     }
 }
