@@ -46,12 +46,12 @@
                 <ComboBox Name="VehicleType" SelectedIndex="0">
                     <ComboBoxItem>Car</ComboBoxItem>
                     <ComboBoxItem>Motorcycle</ComboBoxItem>
-                    <ComboBoxItem>Bus</ComboBoxItem>
                     <ComboBoxItem>Boat</ComboBoxItem>
                     <ComboBoxItem>Airplane</ComboBoxItem>
+                    <ComboBoxItem>Bus</ComboBoxItem>
                 </ComboBox>
-                <TextBox Text="Name Here" Name="VehicleName"/>
-                <TextBox Text="ID Here" Name="VehicleID"/>
+                <TextBox PlaceholderText="Name Here" Name="VehicleName"/>
+                <TextBox PlaceholderText="ID Here" Name="VehicleID"/>
                 <ComboBox Name="VehicleColor" SelectedIndex="0">
                     <ComboBoxItem>White</ComboBoxItem>
                     <ComboBoxItem>Black</ComboBoxItem>
@@ -61,7 +61,7 @@
                     <ComboBoxItem>Silver</ComboBoxItem>
                     <ComboBoxItem>Yellow</ComboBoxItem>
                 </ComboBox>
-                <Button Click="Button_Add">Add Vehicle</Button>
+                <Button Click="Button_Create">Add Vehicle</Button>
             </StackPanel>
         </StackPanel>
     </StackPanel>

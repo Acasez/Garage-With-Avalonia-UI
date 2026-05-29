@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
+using static CSharp_Garage_Task.VehicleClasses.Car;
+using static CSharp_Garage_Task.VehicleClasses.Vehicle;
 using Helper = CSharp_Garage_Task.Helper;
 
 namespace Garage_With_Avalonia_UI.Views;
@@ -162,5 +164,18 @@ public partial class MainWindow : Window
     private void Button_Find(object? sender, RoutedEventArgs e)
     {
         Debug.WriteLine("Find vehicle");
+    }
+
+    private void Button_Create(object? sender, RoutedEventArgs e) //Not quite done yet
+    {
+        List<int> largestEmptyLot = handler.GetLargestEmptyLot();
+        VehicleTypes vehicleType = (VehicleTypes)VehicleType.SelectedIndex;
+        string vehicleName = VehicleName.Text;
+        string vehicleID = VehicleID.Text;
+        VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
+
+        List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
+        //newVehicle = new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, carBrand);
+        //handler.Garage.AddVehicle(newVehicle)
     }
 }
