@@ -112,31 +112,29 @@ namespace CSharp_Garage_Task
             }
         }
 
-        public static int? GetIntFromAvalonia(string input, int min, int max = 999999999)
+        public static bool TryGetIntFromAvalonia(string input, int min, int max, out int result)
         {
-            if (input != null)
-            {
-                if (int.TryParse(input, out int outputInt))
-                {
-                    if (outputInt >= min && outputInt <= max)
-                    {
-                        return outputInt;
-                    }
-                    else
-                    {
-                        WriteErrorMessage("Needs to fit within the specified options");
-                    }
-                }
-                else
-                {
-                    WriteErrorMessage("Not an int, try again");
-                }
-            }
-            else
+            result = 0;
+
+            if (string.IsNullOrWhiteSpace(input))
             {
                 WriteErrorMessage("Invalid input, try again");
+                return false;
             }
-            return null;
+
+            if (!int.TryParse(input, out result))
+            {
+                WriteErrorMessage("Not an int, try again");
+                return false;
+            }
+
+            if (result < min || result > max)
+            {
+                WriteErrorMessage("Needs to fit within the specified options");
+                return false;
+            }
+
+            return true;
         }
 
         internal static void WriteHorizontalLine()

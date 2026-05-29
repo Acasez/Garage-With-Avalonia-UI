@@ -8,12 +8,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
+using Helper = CSharp_Garage_Task.Helper;
 
 namespace Garage_With_Avalonia_UI.Views;
 
 public partial class MainWindow : Window
 {
-    GarageHandler handler = new GarageHandler();
+    GarageHandler handler = new();
     public MainWindow()
     {
         InitializeComponent();
@@ -21,12 +22,10 @@ public partial class MainWindow : Window
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        int? garageSpacesGotten = CSharp_Garage_Task.Helper.GetIntFromAvalonia(Spaces.Text, -3);
-        if (garageSpacesGotten == null)
+        if (!Helper.TryGetIntFromAvalonia(Spaces.Text, -3, 999, out int garageSpaces))
         {
             return;
         }
-        int garageSpaces = (int)garageSpacesGotten;
         Debug.WriteLine("Creating Garage with " + garageSpaces + " spaces");
 
         handler = new GarageHandler();
