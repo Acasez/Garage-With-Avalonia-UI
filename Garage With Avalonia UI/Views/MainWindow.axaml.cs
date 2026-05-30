@@ -38,13 +38,21 @@ public partial class MainWindow : Window
         GarageSpaceCount.Text = "The garage has " + handler.Garage.GarageCapacity + " spaces";
     }
 
+    private void HideSubmenues()
+    {
+        AddVehicleSetup.IsVisible = false;
+        VehicleListGrid.IsVisible = false;
+    }
+
     private void Button_Add(object? sender, RoutedEventArgs e)
     {
+        HideSubmenues();
         Debug.WriteLine("Adding vehicle");
         AddVehicleSetup.IsVisible = true;
     }
     private void Button_List(object? sender, RoutedEventArgs e)
     {
+        HideSubmenues();
         Debug.WriteLine("Listing vehicles");
         VehicleListGrid.Children.Clear();
         VehicleListGrid.Children.Add(CreateGarageGrid());
@@ -163,6 +171,7 @@ public partial class MainWindow : Window
 
     private void Button_Find(object? sender, RoutedEventArgs e)
     {
+        HideSubmenues();
         Debug.WriteLine("Find vehicle");
     }
 
@@ -175,7 +184,8 @@ public partial class MainWindow : Window
         VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
-        //newVehicle = new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, carBrand);
-        //handler.Garage.AddVehicle(newVehicle)
+        Vehicle newVehicle = new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, CarBrand.Volvo);
+        handler.Garage.AddVehicle(newVehicle, garageSpace, true);
+        HideSubmenues();
     }
 }
