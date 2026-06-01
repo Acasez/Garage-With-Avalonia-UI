@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using CSharp_Garage_Task;
 using CSharp_Garage_Task.VehicleClasses;
 using Metsys.Bson;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Garage_With_Avalonia_UI.Views;
 public partial class MainWindow : Window
 {
     GarageHandler handler = new();
-    List<VehicleTypes> currentFittingVehicles = new List<VehicleTypes>();
+    List<VehicleTypes> currentNonFittingVehicles = new List<VehicleTypes>();
     public MainWindow()
     {
         InitializeComponent();
@@ -52,9 +53,23 @@ public partial class MainWindow : Window
         AddVehicleSetup.IsVisible = true;
         List<int> largestEmptyLot = handler.GetLargestEmptyLot();
         VehicleSpaces.Text = "Adding Vehicle to " + Helper.WriteSpaces(largestEmptyLot.Count) + "[" + largestEmptyLot.ToCustomString() + "]";
-        currentFittingVehicles = IHandler.GetFittingVehicles(largestEmptyLot.Count);
 
-        //Make those not it fittingVehicles grayedOut
+        var fittingVehicles = IHandler.GetFittingVehicles(largestEmptyLot.Count);
+
+        foreach (ComboBoxItem item in VehicleType.Items)
+        {
+            if (item.Content is string vehicleName && Enum.TryParse<VehicleTypes>(vehicleName, out var vehicleType))
+            {
+                item.IsEnabled = fittingVehicles.Contains(vehicleType);
+            }
+        }
+
+        // Select first enabled item
+        VehicleType.SelectedIndex = VehicleType.Items
+            .OfType<ComboBoxItem>()
+            .ToList()
+            .FindIndex(x => x.IsEnabled);
+
     }
     private void Button_List(object? sender, RoutedEventArgs e)
     {
