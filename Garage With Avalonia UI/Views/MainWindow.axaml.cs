@@ -184,8 +184,23 @@ public partial class MainWindow : Window
         VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
-        Vehicle newVehicle = new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, CarBrand.Volvo);
+        Vehicle newVehicle = GetNewVehicle(vehicleType, vehicleName, vehicleID, vehicleColor, garageSpace);
+         
         handler.Garage.AddVehicle(newVehicle, garageSpace, true);
         HideSubmenues();
+    }
+
+    private static Vehicle GetNewVehicle(VehicleTypes vehicleType, string vehicleName, string vehicleID, VehicleColors vehicleColor, List<int> garageSpace)
+    {
+        //TODO, don't hardcode specialvalues
+        return vehicleType switch
+        {
+            VehicleTypes.Car => new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, CarBrand.Volvo),
+            VehicleTypes.Motorcycle => new Motorcycle(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 50),
+            VehicleTypes.Boat => new Boat(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, false),
+            VehicleTypes.Airplane => new Airplane(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 300),
+            VehicleTypes.Bus => new Bus(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 25),
+            _ => throw new System.NotImplementedException(),
+        };
     }
 }
