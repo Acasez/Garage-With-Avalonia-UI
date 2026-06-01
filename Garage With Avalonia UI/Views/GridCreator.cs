@@ -16,12 +16,13 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
     private enum SortableColumn { Spaces, Type, Color, Name, ID }
     private readonly GarageHandler handler = handlerRef;
     private readonly StackPanel vehicleListGrid = vehicleListGridRef;
-    private int gridColumns = 5;
+    private const int gridColumns = 5;
+    private static readonly string[] Headers = { "Spaces", "Type", "Color", "Name", "ID" };
 
     private class DisplayRow
     {
         public bool IsEmpty { get; set; }
-        public string[] Cells { get; set; } = new string[4]; // Spaces, Type, Color, NameId
+        public string[] Cells { get; set; } = new string[5]; // Spaces, Type, Color, Name, ID
     }
 
     internal Grid CreateGarageGrid()
@@ -34,13 +35,12 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
 
         // --- Header Row with Sort Buttons ---
         grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
-        var headers = new[] { "Spaces", "Type", "Color", "Name", "ID" };
 
         for (int col = 0; col < gridColumns; col++)
         {
             var btn = new Button
             {
-                Content = headers[col],
+                Content = Headers[col],
                 Margin = new Thickness(5),
                 FontWeight = FontWeight.Bold,
                 Background = Brushes.Transparent,
@@ -102,7 +102,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             displayRows.Add(new DisplayRow
             {
                 IsEmpty = true,
-                Cells = [currentNullSpaces.ToCustomString(), "", "", "No vehicles parked"]
+                Cells = [currentNullSpaces.ToCustomString(), "", "", "", "No vehicles parked"]
             });
         }
 
