@@ -19,8 +19,8 @@ namespace Garage_With_Avalonia_UI.Views;
 public partial class MainWindow : Window
 {
     GarageHandler handler = new();
-    private SortableColumn? _currentSortColumn = null; // Make nullable
-    private bool _isAscending = true;
+    private SortableColumn? currentSortColumn = null; // Make nullable
+    private bool isAscending = true;
 
     private enum SortableColumn {Spaces, Type, Color, NameId }
 
@@ -168,9 +168,9 @@ public partial class MainWindow : Window
         }
 
         // --- Sort Rows if Needed ---
-        if (_currentSortColumn.HasValue)
+        if (currentSortColumn.HasValue)
         {
-            displayRows = SortDisplayRows(displayRows, _currentSortColumn.Value, _isAscending);
+            displayRows = SortDisplayRows(displayRows, currentSortColumn.Value, isAscending);
         }
 
         // --- Add Data Rows ---
@@ -209,12 +209,12 @@ public partial class MainWindow : Window
     {
         if (sender is Button btn && btn.Tag is SortableColumn column)
         {
-            if (_currentSortColumn == column)
-                _isAscending = !_isAscending; // Toggle direction
+            if (currentSortColumn == column)
+                isAscending = !isAscending; // Toggle direction
             else
             {
-                _currentSortColumn = column; // New column
-                _isAscending = true; // Default to ascending
+                currentSortColumn = column; // New column
+                isAscending = true; // Default to ascending
             }
 
             // Rebuild grid with new sorting
@@ -295,7 +295,7 @@ public partial class MainWindow : Window
             VehicleTypes.Boat => new Boat(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, false),
             VehicleTypes.Airplane => new Airplane(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 300),
             VehicleTypes.Bus => new Bus(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 25),
-            _ => throw new System.NotImplementedException(),
+            _ => throw new NotImplementedException(),
         };
     }
 }
