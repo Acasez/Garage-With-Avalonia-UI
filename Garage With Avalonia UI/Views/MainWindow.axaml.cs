@@ -19,10 +19,10 @@ namespace Garage_With_Avalonia_UI.Views;
 public partial class MainWindow : Window
 {
     GarageHandler handler = new();
-    private SortableColumn _currentSortColumn = SortableColumn.None;
+    private SortableColumn? _currentSortColumn = null; // Make nullable
     private bool _isAscending = true;
 
-    private enum SortableColumn { None, Spaces, Type, Color, NameId }
+    private enum SortableColumn {Spaces, Type, Color, NameId }
 
     private class DisplayRow
     {
@@ -67,7 +67,7 @@ public partial class MainWindow : Window
 
         List<VehicleTypes> fittingVehicles = IHandler.GetFittingVehicles(largestEmptyLot.Count);
 
-        foreach (ComboBoxItem item in VehicleType.Items)
+        foreach (ComboBoxItem item in VehicleType.Items.Cast<ComboBoxItem>())
         {
             if (item.Content is string vehicleName && Enum.TryParse<VehicleTypes>(vehicleName, out var vehicleType))
             {
@@ -107,9 +107,9 @@ public partial class MainWindow : Window
                 Margin = new Thickness(5),
                 FontWeight = FontWeight.Bold,
                 Background = Brushes.Transparent,
-                BorderThickness = new Thickness(0)
+                BorderThickness = new Thickness(0),
+                Tag = (SortableColumn)col
             };
-            btn.Tag = (SortableColumn)col;
             btn.Click += SortButton_Click;
             Grid.SetRow(btn, 0);
             Grid.SetColumn(btn, col);
@@ -119,7 +119,7 @@ public partial class MainWindow : Window
         // --- Build Display Rows ---
         var displayRows = new List<DisplayRow>();
         Vehicle? lastVehicle = null;
-        List<int> currentNullSpaces = new List<int>();
+        List<int> currentNullSpaces = [];
 
         for (int i = 0; i < handler.Garage.Vehicles.Length; i++)
         {
@@ -131,7 +131,7 @@ public partial class MainWindow : Window
                 displayRows.Add(new DisplayRow
                 {
                     IsEmpty = true,
-                    Cells = new string[] { currentNullSpaces.ToCustomString(), "", "", "No vehicles parked" }
+                    Cells = [currentNullSpaces.ToCustomString(), "", "", "No vehicles parked"]
                 });
                 currentNullSpaces.Clear();
             }
@@ -143,13 +143,10 @@ public partial class MainWindow : Window
                 displayRows.Add(new DisplayRow
                 {
                     IsEmpty = false,
-                    Cells = new string[]
-                    {
-                    v.parkSpacesOccupied.ToCustomString(),
+                    Cells = [v.parkSpacesOccupied.ToCustomString(),
                     v.VehicleType.ToString(),
                     v.Color.ToString(),
-                    $"{v.Name} (ID: {v.RegisterID})"
-                    }
+                    $"{v.Name} (ID: {v.RegisterID})"]
                 });
             }
             else
@@ -166,14 +163,14 @@ public partial class MainWindow : Window
             displayRows.Add(new DisplayRow
             {
                 IsEmpty = true,
-                Cells = new string[] { currentNullSpaces.ToCustomString(), "", "", "No vehicles parked" }
+                Cells = [currentNullSpaces.ToCustomString(), "", "", "No vehicles parked"]
             });
         }
 
         // --- Sort Rows if Needed ---
-        if (_currentSortColumn != SortableColumn.None)
+        if (_currentSortColumn.HasValue)
         {
-            displayRows = SortDisplayRows(displayRows, _currentSortColumn, _isAscending);
+            displayRows = SortDisplayRows(displayRows, _currentSortColumn.Value, _isAscending);
         }
 
         // --- Add Data Rows ---
@@ -226,7 +223,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private List<DisplayRow> SortDisplayRows(List<DisplayRow> rows, SortableColumn column, bool ascending)
+    private static List<DisplayRow> SortDisplayRows(List<DisplayRow> rows, SortableColumn column, bool ascending)
     {
         // Separate empty and vehicle rows for better sorting
         var emptyRows = rows.Where(r => r.IsEmpty).ToList();
