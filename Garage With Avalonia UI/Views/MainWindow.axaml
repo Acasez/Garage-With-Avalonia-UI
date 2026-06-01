@@ -42,6 +42,7 @@
             <!--Here be grid -->
         </StackPanel>
         <StackPanel Name="AddVehicleSetup" IsVisible="False">
+            <TextBlock Name="VehicleSpaces" HorizontalAlignment="Center"/>
             <StackPanel Name="VehicleInputs" Orientation="Horizontal">
                 <ComboBox Name="VehicleType" SelectedIndex="0">
                     <ComboBoxItem>Car</ComboBoxItem>
@@ -66,5 +67,4 @@
         </StackPanel>
     </StackPanel>
     
-
 </Window>

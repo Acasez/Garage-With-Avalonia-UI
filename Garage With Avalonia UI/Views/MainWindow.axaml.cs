@@ -49,6 +49,8 @@ public partial class MainWindow : Window
         HideSubmenues();
         Debug.WriteLine("Adding vehicle");
         AddVehicleSetup.IsVisible = true;
+        List<int> largestEmptyLot = handler.GetLargestEmptyLot();
+        VehicleSpaces.Text = "Adding Vehicle to " + Helper.WriteSpaces(largestEmptyLot.Count) + "[" + largestEmptyLot.ToCustomString() + "]";
     }
     private void Button_List(object? sender, RoutedEventArgs e)
     {
