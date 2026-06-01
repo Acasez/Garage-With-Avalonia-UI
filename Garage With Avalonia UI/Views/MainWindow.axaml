@@ -54,12 +54,12 @@
                 <TextBox PlaceholderText="ID Here" Name="VehicleID"/>
                 <ComboBox Name="VehicleColor" SelectedIndex="0">
                     <ComboBoxItem>White</ComboBoxItem>
-                    <ComboBoxItem>Black</ComboBoxItem>
-                    <ComboBoxItem>Red</ComboBoxItem>
-                    <ComboBoxItem>Blue</ComboBoxItem>
-                    <ComboBoxItem>Green</ComboBoxItem>
-                    <ComboBoxItem>Silver</ComboBoxItem>
-                    <ComboBoxItem>Yellow</ComboBoxItem>
+                    <ComboBoxItem><TextBlock Foreground="White" Background="Black">Black</TextBlock></ComboBoxItem>
+                    <ComboBoxItem><TextBlock Foreground="White" Background="Red">Red</TextBlock></ComboBoxItem>
+                    <ComboBoxItem><TextBlock Foreground="White" Background="Blue">Blue</TextBlock></ComboBoxItem>
+                    <ComboBoxItem><TextBlock Background="Green">Gren</TextBlock></ComboBoxItem>
+                    <ComboBoxItem><TextBlock Background="Silver">Silver</TextBlock></ComboBoxItem>
+                    <ComboBoxItem><TextBlock Background="Yellow">Yellow</TextBlock></ComboBoxItem>
                 </ComboBox>
                 <Button Click="Button_Create">Add Vehicle</Button>
             </StackPanel>
