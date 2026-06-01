@@ -4,12 +4,8 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using CSharp_Garage_Task;
 using CSharp_Garage_Task.VehicleClasses;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using static CSharp_Garage_Task.VehicleClasses.Vehicle;
 
 namespace Garage_With_Avalonia_UI.Views;
 
@@ -17,9 +13,10 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
 {
     private SortableColumn? currentSortColumn = null; // Make nullable
     private bool isAscending = true;
-    private enum SortableColumn { Spaces, Type, Color, NameId }
+    private enum SortableColumn { Spaces, Type, Color, Name, ID }
     private readonly GarageHandler handler = handlerRef;
     private readonly StackPanel vehicleListGrid = vehicleListGridRef;
+    private int gridColumns = 5;
 
     private class DisplayRow
     {
@@ -31,15 +28,15 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
     {
         var grid = new Grid { ShowGridLines = true, Margin = new Thickness(5) };
 
-        // Define 4 columns
-        for (int i = 0; i < 4; i++)
+        // Define the grid columns
+        for (int i = 0; i < gridColumns; i++)
             grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
 
         // --- Header Row with Sort Buttons ---
         grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
-        var headers = new[] { "Spaces", "Type", "Color", "Name (ID)" };
+        var headers = new[] { "Spaces", "Type", "Color", "Name", "ID" };
 
-        for (int col = 0; col < 4; col++)
+        for (int col = 0; col < gridColumns; col++)
         {
             var btn = new Button
             {
@@ -83,10 +80,12 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                 displayRows.Add(new DisplayRow
                 {
                     IsEmpty = false,
-                    Cells = [v.parkSpacesOccupied.ToCustomString(),
-                v.VehicleType.ToString(),
-                v.Color.ToString(),
-                $"{v.Name} (ID: {v.RegisterID})"]
+                    Cells = 
+                    [v.parkSpacesOccupied.ToCustomString(),
+                    v.VehicleType.ToString(),
+                    v.Color.ToString(),
+                    v.Name,
+                    v.RegisterID]
                 });
             }
             else
@@ -127,12 +126,12 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                     Margin = new Thickness(5)
                 };
                 Grid.SetRow(txt, rowIdx + 1);
-                Grid.SetColumnSpan(txt, 4);
+                Grid.SetColumnSpan(txt, gridColumns);
                 grid.Children.Add(txt);
             }
             else
             {
-                for (int col = 0; col < 4; col++)
+                for (int col = 0; col < gridColumns; col++)
                 {
                     var txt = new TextBlock { Text = row.Cells[col], Margin = new Thickness(5) };
                     Grid.SetRow(txt, rowIdx + 1);
@@ -181,9 +180,12 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             SortableColumn.Color => ascending
                 ? vehicleRows.OrderBy(r => r.Cells[2]).ToList()
                 : vehicleRows.OrderByDescending(r => r.Cells[2]).ToList(),
-            SortableColumn.NameId => ascending
+            SortableColumn.Name => ascending
                 ? vehicleRows.OrderBy(r => r.Cells[3]).ToList()
                 : vehicleRows.OrderByDescending(r => r.Cells[3]).ToList(),
+            SortableColumn.ID => ascending
+                ? vehicleRows.OrderBy(r => r.Cells[4]).ToList()
+                : vehicleRows.OrderByDescending(r => r.Cells[4]).ToList(),
             _ => vehicleRows
         };
 
