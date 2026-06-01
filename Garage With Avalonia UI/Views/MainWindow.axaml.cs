@@ -54,7 +54,7 @@ public partial class MainWindow : Window
         List<int> largestEmptyLot = handler.GetLargestEmptyLot();
         VehicleSpaces.Text = "Adding Vehicle to " + Helper.WriteSpaces(largestEmptyLot.Count) + "[" + largestEmptyLot.ToCustomString() + "]";
 
-        var fittingVehicles = IHandler.GetFittingVehicles(largestEmptyLot.Count);
+        List<VehicleTypes> fittingVehicles = IHandler.GetFittingVehicles(largestEmptyLot.Count);
 
         foreach (ComboBoxItem item in VehicleType.Items)
         {
@@ -64,11 +64,7 @@ public partial class MainWindow : Window
             }
         }
 
-        // Select first enabled item
-        VehicleType.SelectedIndex = VehicleType.Items
-            .OfType<ComboBoxItem>()
-            .ToList()
-            .FindIndex(x => x.IsEnabled);
+        VehicleType.SelectedIndex = VehicleType.Items.OfType<ComboBoxItem>().ToList().FindIndex(x => x.IsEnabled);
 
     }
     private void Button_List(object? sender, RoutedEventArgs e)
