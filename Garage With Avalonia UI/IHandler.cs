@@ -43,6 +43,24 @@ internal interface IHandler
         }
     }
 
+    internal static List<VehicleTypes> GetFittingVehicles(int sizeLimit = 5)
+    {
+        List<VehicleTypes> nonFittingVehicles = [];
+        List<VehicleTypes> fittingVehicles = [];
+        foreach (VehicleTypes type in Enum.GetValues<VehicleTypes>())
+        {
+            if (GetSizeOfVehicle(type) > sizeLimit)
+            {
+                nonFittingVehicles.Add(type);
+            }
+            else
+            {
+                fittingVehicles.Add(type);
+            }
+        }
+        return fittingVehicles;
+    }
+
     internal static VehicleTypes GetVehicleType(int sizeLimit = 5)
     {
         List<VehicleTypes> nonFittingVehicles = [];

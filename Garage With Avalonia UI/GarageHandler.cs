@@ -123,6 +123,7 @@ namespace CSharp_Garage_Task
             }
         }
 
+
         public void DisplayGarageSpaces()
         {
             Vehicle? lastVehicle = null; //TODO, would like to format this as a grid

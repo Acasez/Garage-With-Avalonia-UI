@@ -17,6 +17,7 @@ namespace Garage_With_Avalonia_UI.Views;
 public partial class MainWindow : Window
 {
     GarageHandler handler = new();
+    List<VehicleTypes> currentFittingVehicles = new List<VehicleTypes>();
     public MainWindow()
     {
         InitializeComponent();
@@ -51,6 +52,9 @@ public partial class MainWindow : Window
         AddVehicleSetup.IsVisible = true;
         List<int> largestEmptyLot = handler.GetLargestEmptyLot();
         VehicleSpaces.Text = "Adding Vehicle to " + Helper.WriteSpaces(largestEmptyLot.Count) + "[" + largestEmptyLot.ToCustomString() + "]";
+        currentFittingVehicles = IHandler.GetFittingVehicles(largestEmptyLot.Count);
+
+        //Make those not it fittingVehicles grayedOut
     }
     private void Button_List(object? sender, RoutedEventArgs e)
     {
