@@ -75,6 +75,7 @@ public partial class MainWindow : Window
         VehicleListGrid.Children.Add(CreateGarageGrid());
         VehicleListGrid.IsVisible = true;
     }
+
     public Grid CreateGarageGrid()
     {
         var grid = new Grid
@@ -84,18 +85,35 @@ public partial class MainWindow : Window
         };
 
         // Define 4 columns: Spaces, Type, Color, Name+ID
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Spaces
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Type
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Color
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Name+ID
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
-        int rowIndex = 0;
+        // --- Add header row ---
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+        var headers = new[] { "Spaces", "Type", "Color", "Name (ID)" };
+        for (int col = 0; col < headers.Length; col++)
+        {
+            var header = new TextBlock
+            {
+                Text = headers[col],
+                Margin = new Thickness(5, 5, 5, 5),
+                FontWeight = Avalonia.Media.FontWeight.Bold
+            };
+            Grid.SetRow(header, 0);
+            Grid.SetColumn(header, col);
+            grid.Children.Add(header);
+        }
+        // --- End header row ---
+
+        int rowIndex = 1; // Start data rows after header
         Vehicle? lastVehicle = null;
         List<int> currentNullSpaces = new List<int>();
 
         for (int i = 0; i < handler.Garage.Vehicles.Length; i++)
         {
-            // Skip duplicates
             if (handler.Garage.Vehicles[i] == lastVehicle && handler.Garage.Vehicles[i] != null) continue;
 
             // Handle empty spaces group
@@ -108,7 +126,7 @@ public partial class MainWindow : Window
                     Margin = new Thickness(0, 5, 0, 5)
                 };
                 Grid.SetRow(emptyText, rowIndex);
-                Grid.SetColumnSpan(emptyText, 4); // Span all columns
+                Grid.SetColumnSpan(emptyText, 4);
                 grid.Children.Add(emptyText);
                 rowIndex++;
                 currentNullSpaces.Clear();
@@ -119,45 +137,33 @@ public partial class MainWindow : Window
             {
                 grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-                // Spaces
                 var spacesText = new TextBlock
                 {
                     Text = handler.Garage.Vehicles[i].parkSpacesOccupied.ToCustomString(),
                     Margin = new Thickness(5, 5, 5, 5)
                 };
-                Grid.SetRow(spacesText, rowIndex);
-                Grid.SetColumn(spacesText, 0);
-                grid.Children.Add(spacesText);
+                Grid.SetRow(spacesText, rowIndex); Grid.SetColumn(spacesText, 0); grid.Children.Add(spacesText);
 
-                // Type
                 var typeText = new TextBlock
                 {
                     Text = handler.Garage.Vehicles[i].VehicleType.ToString(),
                     Margin = new Thickness(5, 5, 5, 5)
                 };
-                Grid.SetRow(typeText, rowIndex);
-                Grid.SetColumn(typeText, 1);
-                grid.Children.Add(typeText);
+                Grid.SetRow(typeText, rowIndex); Grid.SetColumn(typeText, 1); grid.Children.Add(typeText);
 
-                // Color
                 var colorText = new TextBlock
                 {
                     Text = handler.Garage.Vehicles[i].Color.ToString(),
                     Margin = new Thickness(5, 5, 5, 5)
                 };
-                Grid.SetRow(colorText, rowIndex);
-                Grid.SetColumn(colorText, 2);
-                grid.Children.Add(colorText);
+                Grid.SetRow(colorText, rowIndex); Grid.SetColumn(colorText, 2); grid.Children.Add(colorText);
 
-                // Name + ID
                 var nameIdText = new TextBlock
                 {
-                    Text = handler.Garage.Vehicles[i].Name + " (ID: " + handler.Garage.Vehicles[i].RegisterID + ")",
+                    Text = $"{handler.Garage.Vehicles[i].Name} (ID: {handler.Garage.Vehicles[i].RegisterID})",
                     Margin = new Thickness(5, 5, 5, 5)
                 };
-                Grid.SetRow(nameIdText, rowIndex);
-                Grid.SetColumn(nameIdText, 3);
-                grid.Children.Add(nameIdText);
+                Grid.SetRow(nameIdText, rowIndex); Grid.SetColumn(nameIdText, 3); grid.Children.Add(nameIdText);
 
                 rowIndex++;
             }
