@@ -137,6 +137,19 @@ namespace CSharp_Garage_Task
             return true;
         }
 
+        public static bool TryGetStringFromAvalonia(string input, out string result)
+        {
+            result = "";
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                WriteErrorMessage("Invalid input, try again");
+                return false;
+            }
+
+            return true;
+        }
+
         internal static void WriteHorizontalLine()
         {
             WriteMessage("-----------------------------------", ConsoleColor.White);

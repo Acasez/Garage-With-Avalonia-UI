@@ -135,7 +135,7 @@ public partial class MainWindow : Window
                 // Name + ID
                 var nameIdText = new TextBlock
                 {
-                    Text = handler.Garage.Vehicles[i].Name + " (ID: + " + handler.Garage.Vehicles[i].RegisterID + ")",
+                    Text = handler.Garage.Vehicles[i].Name + " (ID: " + handler.Garage.Vehicles[i].RegisterID + ")",
                     Margin = new Thickness(5, 5, 5, 5)
                 };
                 Grid.SetRow(nameIdText, rowIndex);
@@ -179,8 +179,16 @@ public partial class MainWindow : Window
     {
         List<int> largestEmptyLot = handler.GetLargestEmptyLot();
         VehicleTypes vehicleType = (VehicleTypes)VehicleType.SelectedIndex;
-        string vehicleName = VehicleName.Text;
-        string vehicleID = VehicleID.Text;
+        if (!Helper.TryGetStringFromAvalonia(VehicleName.Text, out string vehicleName))
+        {
+            Debug.WriteLine("Vehicle name cannot be null");
+            return;
+        }
+        if (!Helper.TryGetStringFromAvalonia(VehicleID.Text, out string vehicleID))
+        {
+            Debug.WriteLine("Vehicle ID cannot be null");
+            return;
+        }
         VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
