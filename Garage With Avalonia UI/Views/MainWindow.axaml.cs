@@ -34,6 +34,11 @@ public partial class MainWindow : Window
         }
         Debug.WriteLine("Creating Garage with " + garageSpaces + " spaces");
 
+        CreateGarage(garageSpaces);
+    }
+
+    private void CreateGarage(int garageSpaces)
+    {
         handler = new GarageHandler();
 
         handler.CreateGarage(garageSpaces);
@@ -41,6 +46,18 @@ public partial class MainWindow : Window
         Garage.IsVisible = true;
         GarageSpaceCount.Text = "The garage has " + handler.Garage.GarageCapacity + " spaces";
         gridCreator = new(handler, VehicleListGrid);
+    }
+    private void Button_Luxury(object? sender, RoutedEventArgs e)
+    {
+        CreateGarage(-1);
+    }
+    private void Button_Huge(object? sender, RoutedEventArgs e)
+    {
+        CreateGarage(-2);
+    }
+    private void Button_Spaced(object? sender, RoutedEventArgs e)
+    {
+        CreateGarage(-3);
     }
 
     private void HideSubmenues()
@@ -103,7 +120,7 @@ public partial class MainWindow : Window
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
         Vehicle newVehicle = GetNewVehicle(vehicleType, vehicleName, vehicleID, vehicleColor, garageSpace);
-         
+
         handler.Garage.AddVehicle(newVehicle, garageSpace, true);
         HideSubmenues();
     }

@@ -17,21 +17,22 @@
 
     <StackPanel Name="Base">
         <Border Margin="5" CornerRadius="10" Background="LightBlue">
-                <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
-            </Border>
+            <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
+        </Border>
         <StackPanel Name="GarageCreation">
             <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Instructions}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Grid ShowGridLines="False" Margin="5" 
-                  ColumnDefinitions="120, 100"
-                  RowDefinitions="Auto, Auto">
-                <TextBox Grid.Row="0" Grid.Column="0" Margin="0 5" Text="0" Name="Spaces"/>
-                <Button Grid.Row="0" Grid.Column="1" Click="Button_OnClick">Build Garage</Button>
-            </Grid>
+            <StackPanel Name="CreationPanel" Orientation="Horizontal">
+                <TextBox Name="Spaces"/>
+                <Button Click="Button_OnClick">Build Garage</Button>
+                <TextBlock Name="PredefinedGarages" Text="Predefined Garages" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Click="Button_Luxury">Luxury Garage</Button>
+                <Button Click="Button_Huge">Huge Garage</Button>
+                <Button Click="Button_Spaced">Spaced Garage</Button>
+            </StackPanel>
         </StackPanel>
         <StackPanel Name="Garage" IsVisible="False">
              <TextBlock Name="GarageSpaceCount" Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
             <StackPanel Name="OptionList" Orientation="Horizontal">
                 <Button Click="Button_List">List Vehicles</Button>
                 <Button Click="Button_Add">Add Vehicle</Button>
