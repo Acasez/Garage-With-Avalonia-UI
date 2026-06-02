@@ -42,7 +42,6 @@ abstract class Vehicle : IVehicle
         VehicleType = vehicleType;
         parkSpacesOccupied = parkedNumbers;
     }
-
     public virtual string ToString(bool showSpaces)
     {
         if (showSpaces)
@@ -50,5 +49,10 @@ abstract class Vehicle : IVehicle
             return VehicleType.ToString() + ": " + Name + " with ID " + RegisterID + " of color " + Color.ToString() + " occupying " + Helper.WriteSpaces(parkSpacesOccupied.Count).ToLower() + parkSpacesOccupied.ToCustomString();
         }
         return VehicleType.ToString() + ": " + Name + " with ID " + RegisterID + " of color " + Color.ToString();
+    }
+
+    public virtual string GetSpecialValue()
+    {
+        return "Error, use vehicle types override instead";
     }
 }

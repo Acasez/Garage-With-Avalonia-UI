@@ -20,5 +20,9 @@ namespace CSharp_Garage_Task.VehicleClasses
         {
             return base.ToString(showSpaces) + " with" + (Sail ? " sails" : " no sails");
         }
+        public override string GetSpecialValue()
+        {
+            return Sail.ToString();
+        }
     }
 }

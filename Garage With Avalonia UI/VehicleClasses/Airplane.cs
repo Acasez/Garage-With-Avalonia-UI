@@ -20,5 +20,9 @@ namespace CSharp_Garage_Task.VehicleClasses
         {
             return base.ToString(showSpaces) + " with " + FlightHours + " flight hours";
         }
+        public override string GetSpecialValue()
+        {
+            return FlightHours.ToString();
+        }
     }
 }

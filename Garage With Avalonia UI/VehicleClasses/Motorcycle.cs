@@ -20,5 +20,10 @@ namespace CSharp_Garage_Task.VehicleClasses
         {
             return base.ToString(showSpaces) + " with a top speed of " + TopSpeed;
         }
+
+        public override string GetSpecialValue()
+        {
+            return TopSpeed.ToString();
+        }
     }
 }
