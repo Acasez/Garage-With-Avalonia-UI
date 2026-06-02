@@ -67,17 +67,5 @@ namespace CSharp_Garage_Task
             ParkedVehicles++;
         }
 
-        internal void ListAllVehiclesOfType()
-        {
-            VehicleTypes vehicleType = IHandler.GetVehicleType();
-
-            for (int i = 0; i < Vehicles.Length; i++)
-            {
-                if (Vehicles[i] != null && Vehicles[i].VehicleType == vehicleType)
-                {
-                    Helper.WriteMessage(Vehicles[i].ToString());
-                }
-            }
-        }
     }
 }
