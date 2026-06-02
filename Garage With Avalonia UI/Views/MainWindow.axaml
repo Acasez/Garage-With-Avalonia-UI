@@ -78,7 +78,10 @@
                 </ComboBox>
                 <TextBox IsVisible="False" PlaceholderText="Input Capacity" Name="BusCapacity"/>
                 <TextBox IsVisible="False" PlaceholderText="Input Max Speed" Name="MCSpeed"/>
-                <CheckBox Name="BoatSails"></CheckBox>
+                <StackPanel Name="BoatSails" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center">Sails?</TextBlock>
+                    <CheckBox Name="BoatSailsCheck"></CheckBox>
+                </StackPanel>
                 <TextBox IsVisible="False" PlaceholderText="Input Flight Hours" Name="PlaneHours"/>
                 
                 <Button Click="Button_Create">Add Vehicle</Button>

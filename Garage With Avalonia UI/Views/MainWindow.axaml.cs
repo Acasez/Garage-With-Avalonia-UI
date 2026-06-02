@@ -69,7 +69,7 @@ public partial class MainWindow : Window
         AddVehicleSetup.IsVisible = false;
         VehicleListGrid.IsVisible = false;
 
-        CarBrand.IsVisible = false;
+        CarBrand.IsVisible = true;
         MCSpeed.IsVisible = false;
         BoatSails.IsVisible = false;
         PlaneHours.IsVisible = false;
@@ -213,7 +213,7 @@ public partial class MainWindow : Window
 
     private bool GetSails()
     {
-        return BoatSails.IsPressed;
+        return BoatSailsCheck.IsPressed;
     }
 
     private CarBrands GetCarBrand()

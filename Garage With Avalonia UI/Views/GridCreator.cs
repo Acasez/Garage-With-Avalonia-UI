@@ -19,6 +19,8 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
     private const int gridColumns = 7;
     private static readonly string[] Headers = { "Spaces", "Type", "Color", "Name", "ID", "Special", "Remove" };
 
+    private const int tableThickness = 5;
+
     private class DisplayRow
     {
         public bool IsEmpty { get; set; }
@@ -42,7 +44,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             var btn = new Button
             {
                 Content = Headers[col],
-                Margin = new Thickness(5),
+                Margin = new Thickness(tableThickness),
                 FontWeight = FontWeight.Bold,
                 Background = Brushes.Transparent,
                 BorderThickness = new Thickness(0),
@@ -141,7 +143,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                     var txt = new TextBlock
                     {
                         Text = row.Cells[col],
-                        Margin = new Thickness(5)
+                        Margin = new Thickness(tableThickness)
                     };
 
                     Grid.SetRow(txt, rowIdx + 1);
@@ -153,7 +155,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                 {
                     Content = "Delete",
                     Tag = row.Vehicle,
-                    Margin = new Thickness(5)
+                    Margin = new Thickness(tableThickness)
                 };
 
                 deleteButton.Click += DeleteButton_Click;
