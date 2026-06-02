@@ -62,8 +62,8 @@ namespace CSharp_Garage_Task
             foreach (int newFreeSpace in vehicle.parkSpacesOccupied)
             {
                 Garage.Vehicles[newFreeSpace] = null;
+                Garage.FreeUpSpace();
             }
-            Garage.ParkedVehicles--;
         }
 
         public void ListVehiclesTypes()
@@ -82,14 +82,14 @@ namespace CSharp_Garage_Task
 
         public bool CheckForGarageSpace()
         {
-            if (Garage.GarageCapacity > Garage.ParkedVehicles)
+            foreach (Vehicle vehicle in Garage)
             {
-                return true;
+                if (vehicle == null)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public List<int> GetLargestEmptyLot()

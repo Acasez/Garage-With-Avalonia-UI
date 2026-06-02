@@ -18,7 +18,7 @@ namespace CSharp_Garage_Task
         }
         public Vehicle[] Vehicles { get; private set; }
         public int GarageCapacity { get; private set; }
-        public int ParkedVehicles { get; set; }
+        public int UsedCapacity { get; private set; }
         public Garage(int size)
         {
             if (size > 0)
@@ -31,6 +31,12 @@ namespace CSharp_Garage_Task
                 throw new ArgumentException("Garage cannot be smaller than 0");
             }
         }
+
+        public void FreeUpSpace()
+        {
+            UsedCapacity--;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             foreach (Vehicle vehicle in Vehicles)
@@ -53,7 +59,7 @@ namespace CSharp_Garage_Task
             foreach (int space in spaces)
             {
                 Vehicles[space] = vehicle;
-                ParkedVehicles++;
+                UsedCapacity++;
             }
         }
 

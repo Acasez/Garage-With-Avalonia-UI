@@ -50,7 +50,7 @@ public partial class MainWindow : Window
         handler.CreateGarage(garageSpaces);
         GarageCreation.IsVisible = false;
         Garage.IsVisible = true;
-        GarageSpaceCount.Text = "The garage has " + handler.Garage.GarageCapacity + " spaces";
+        GarageSpaceCount.Text = "The garage has " + handler.Garage.GarageCapacity + " spaces. " + handler.Garage.UsedCapacity + " of which is used";
         gridCreator = new(handler, VehicleListGrid);
     }
     private void Button_Luxury(object? sender, RoutedEventArgs e)

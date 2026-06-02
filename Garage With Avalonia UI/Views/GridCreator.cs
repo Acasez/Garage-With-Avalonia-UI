@@ -41,16 +41,25 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
 
         for (int col = 0; col < gridColumns; col++)
         {
+            string headerText = Headers[col];
+
+            if (currentSortColumn == (SortableColumn)col)
+            {
+                headerText += isAscending ? " ▼" : " ▲";
+            }
+
             var btn = new Button
             {
-                Content = Headers[col],
-                Margin = new Thickness(tableThickness),
+                Content = headerText,
+                Margin = new Thickness(5),
                 FontWeight = FontWeight.Bold,
                 Background = Brushes.Transparent,
                 BorderThickness = new Thickness(0),
                 Tag = (SortableColumn)col
             };
+
             btn.Click += SortButton_Click;
+
             Grid.SetRow(btn, 0);
             Grid.SetColumn(btn, col);
             grid.Children.Add(btn);
@@ -182,19 +191,21 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
         }
     }
 
-    private void SortButton_Click(object sender, RoutedEventArgs e)
+    private void SortButton_Click(object? sender, RoutedEventArgs e)
     {
-        if (sender is Button btn && btn.Tag is SortableColumn column)
+        if (sender is Button button &&
+            button.Tag is SortableColumn clickedColumn)
         {
-            if (currentSortColumn == column)
-                isAscending = !isAscending; // Toggle direction
+            if (currentSortColumn == clickedColumn)
+            {
+                isAscending = !isAscending;
+            }
             else
             {
-                currentSortColumn = column; // New column
-                isAscending = true; // Default to ascending
+                currentSortColumn = clickedColumn;
+                isAscending = true;
             }
 
-            // Rebuild grid with new sorting
             vehicleListGrid.Children.Clear();
             vehicleListGrid.Children.Add(CreateGarageGrid());
         }
