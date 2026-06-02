@@ -19,18 +19,19 @@
         <Border Margin="5" CornerRadius="10" Background="LightBlue">
             <TextBlock Margin="5" FontSize="24"  HorizontalAlignment="Center" Text="Garage"/>
         </Border>
-        <StackPanel Name="GarageCreation">
-            <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Instructions}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <StackPanel Name="CreationPanel" Orientation="Horizontal">
+        <DockPanel Name="GarageCreation" LastChildFill="False">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                 <TextBox Name="Spaces"/>
                 <Button Click="Button_OnClick">Build Garage</Button>
-                <TextBlock Name="PredefinedGarages" Text="Predefined Garages" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <TextBlock Text="Predefined Garages" VerticalAlignment="Center"/>
                 <Button Click="Button_Luxury">Luxury Garage</Button>
                 <Button Click="Button_Huge">Huge Garage</Button>
                 <Button Click="Button_Spaced">Spaced Garage</Button>
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
         <StackPanel Name="Garage" IsVisible="False">
              <TextBlock Name="GarageSpaceCount" Text="The garage has X spaces" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <StackPanel Name="OptionList" Orientation="Horizontal">
