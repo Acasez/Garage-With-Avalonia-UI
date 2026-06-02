@@ -37,7 +37,6 @@
             <StackPanel Name="OptionList" Orientation="Horizontal">
                 <Button Click="Button_List">List Vehicles</Button>
                 <Button Click="Button_Add">Add Vehicle</Button>
-                <Button Click="Button_Find">Find Vehicle</Button>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="VehicleListGrid" IsVisible="True">
@@ -87,6 +86,10 @@
                 <Button Click="Button_Create">Add Vehicle</Button>
             </StackPanel>
         </StackPanel>
+        <TextBlock Name="ErrorMessages" Foreground="Red" FontSize="30"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                   FontWeight="Bold" IsVisible="False"
+                >Error</TextBlock>
     </StackPanel>
     
 </Window>

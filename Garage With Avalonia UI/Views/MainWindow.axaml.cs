@@ -34,11 +34,13 @@ public partial class MainWindow : Window
     {
         if (!Helper.TryGetIntFromAvalonia(Spaces.Text, -3, 999, out int garageSpaces))
         {
+            SetupErrorMessage("Invalid garage size");
             return;
         }
         Debug.WriteLine("Creating Garage with " + garageSpaces + " spaces");
 
         CreateGarage(garageSpaces);
+        RemoveErrorMessage();
     }
 
     private void CreateGarage(int garageSpaces)
@@ -74,6 +76,7 @@ public partial class MainWindow : Window
         BoatSails.IsVisible = false;
         PlaneHours.IsVisible = false;
         BusCapacity.IsVisible = false;
+        RemoveErrorMessage();
     }
 
     private void Button_Add(object? sender, RoutedEventArgs e)
@@ -81,10 +84,10 @@ public partial class MainWindow : Window
         if (handler.CheckForGarageSpace() == false)
         {
             Debug.WriteLine("No space in garage");
+            SetupErrorMessage("No space in garage");
             return;
         }
         HideSubmenues();
-        Debug.WriteLine("Adding vehicle");
         AddVehicleSetup.IsVisible = true;
         List<int> largestEmptyLot = handler.GetLargestEmptyLot();
         VehicleSpaces.Text = "Adding Vehicle to " + Helper.WriteSpaces(largestEmptyLot.Count) + "[" + largestEmptyLot.ToCustomString() + "]";
@@ -100,6 +103,7 @@ public partial class MainWindow : Window
         }
         canChangeType = true;
         VehicleType.SelectedIndex = VehicleType.Items.OfType<ComboBoxItem>().ToList().FindIndex(x => x.IsEnabled);
+        RemoveErrorMessage();
     }
 
     private void SelectedVehicleType(object? sender, SelectionChangedEventArgs e)
@@ -148,16 +152,11 @@ public partial class MainWindow : Window
     private void Button_List(object? sender, RoutedEventArgs e)
     {
         HideSubmenues();
+        RemoveErrorMessage();
         Debug.WriteLine("Listing vehicles");
         VehicleListGrid.Children.Clear();
         VehicleListGrid.Children.Add(gridCreator.CreateGarageGrid());
         VehicleListGrid.IsVisible = true;
-    }
-
-    private void Button_Find(object? sender, RoutedEventArgs e)
-    {
-        HideSubmenues();
-        Debug.WriteLine("Find vehicle");
     }
 
     private void Button_Create(object? sender, RoutedEventArgs e) //Not quite done yet
@@ -167,25 +166,28 @@ public partial class MainWindow : Window
         if (!Helper.TryGetStringFromAvalonia(VehicleName.Text, out string vehicleName))
         {
             Debug.WriteLine("Vehicle name cannot be null");
+            SetupErrorMessage("Vehicle name cannot be null");
             return;
         }
         if (!Helper.TryGetStringFromAvalonia(VehicleID.Text, out string vehicleID))
         {
             Debug.WriteLine("Vehicle ID cannot be null");
+            SetupErrorMessage("Vehicle ID cannot be null");
             return;
         }
         if (handler.GetVehicleByID(vehicleID) != null)
         {
             Debug.WriteLine("Vehicle ID already in use");
+            SetupErrorMessage("Vehicle ID already in use");
             return;
         }
         VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(currentVehicleType));
         Vehicle newVehicle = GetNewVehicle(currentVehicleType, vehicleName, vehicleID, vehicleColor, garageSpace);
-        Debug.WriteLine("Creating vehicle with name " + vehicleName + " and ID " + vehicleID);
         handler.Garage.AddVehicle(newVehicle, garageSpace, true);
         HideSubmenues();
+        RemoveErrorMessage();
     }
 
     private Vehicle GetNewVehicle(VehicleTypes vehicleType, string vehicleName, string vehicleID, VehicleColors vehicleColor, List<int> garageSpace)
@@ -231,5 +233,16 @@ public partial class MainWindow : Window
         if (int.TryParse(MCSpeed.Text, out int speed))
             return speed;
         return 0;
+    }
+
+    private void SetupErrorMessage(string message)
+    {
+        ErrorMessages.IsVisible = true;
+        ErrorMessages.Text = message;
+    }
+
+    private void RemoveErrorMessage()
+    {
+        ErrorMessages.IsVisible = false;
     }
 }
