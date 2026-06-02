@@ -119,25 +119,5 @@ namespace CSharp_Garage_Task
             }
             return largestLot;
         }
-
-        private static void DisplayCurrentFilters(VehicleTypes? typeFilter, VehicleColors? colorFilter, int? wheelCountFilter)
-        {
-            if (typeFilter == null && colorFilter == null && wheelCountFilter == null)
-            {
-                Helper.WriteMessage("No filters currently", ConsoleColor.Green);
-            }
-            if (typeFilter != null)
-            {
-                Helper.WriteMessage("Type filter: " + typeFilter, ConsoleColor.Green);
-            }
-            if (colorFilter != null)
-            {
-                Helper.WriteMessage("Color filter: " + colorFilter, ConsoleColor.Green);
-            }
-            if (wheelCountFilter != null)
-            {
-                Helper.WriteMessage("Wheel count filter: " + wheelCountFilter, ConsoleColor.Green);
-            }
-        }
     }
 }

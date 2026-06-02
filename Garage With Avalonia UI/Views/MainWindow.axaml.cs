@@ -116,6 +116,11 @@ public partial class MainWindow : Window
             Debug.WriteLine("Vehicle ID cannot be null");
             return;
         }
+        if (handler.GetVehicleByID(vehicleID) != null)
+        {
+            Debug.WriteLine("Vehicle ID already in use");
+            return;
+        }
         VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
