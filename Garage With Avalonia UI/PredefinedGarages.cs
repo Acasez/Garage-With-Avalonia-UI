@@ -12,7 +12,7 @@ namespace CSharp_Garage_Task
         internal static Garage<Vehicle> LuxuryGarage()
         {
             Garage<Vehicle> luxuryGarage = new(5);
-            Vehicle fastCar = new Car("Wroom", "24", VehicleColors.Red, VehicleTypes.Car, 0.ToList(), Car.CarBrand.Porshe);
+            Vehicle fastCar = new Car("Wroom", "24", VehicleColors.Red, VehicleTypes.Car, 0.ToList(), Car.CarBrands.Porshe);
             luxuryGarage.AddVehicle(fastCar, 0);
 
             Vehicle yacht = new Boat("Yacht", "420", VehicleColors.Blue, VehicleTypes.Boat, 1.ToList(), true);
@@ -27,19 +27,19 @@ namespace CSharp_Garage_Task
         internal static Garage<Vehicle> HugeGarage()
         {
             Garage<Vehicle> hugeGarage = new (25);
-            Vehicle fastCar = new Car("Wroom", "24", VehicleColors.Red, VehicleTypes.Car, 0.ToList(), Car.CarBrand.Porshe);
+            Vehicle fastCar = new Car("Wroom", "24", VehicleColors.Red, VehicleTypes.Car, 0.ToList(), Car.CarBrands.Porshe);
             hugeGarage.AddVehicle(fastCar, 0);
 
             Vehicle mcBike = new Motorcycle("mcBike", "994MCC", VehicleColors.Black, VehicleTypes.Motorcycle, 1.ToList(), 120);
             hugeGarage.AddVehicle(mcBike, 1);
 
-            Vehicle yesINeedASUV = new Car("yesINeedASUV", "221SUV", VehicleColors.White, VehicleTypes.Car, 2.ToList(), Car.CarBrand.Ford);
+            Vehicle yesINeedASUV = new Car("yesINeedASUV", "221SUV", VehicleColors.White, VehicleTypes.Car, 2.ToList(), Car.CarBrands.Ford);
             hugeGarage.AddVehicle(yesINeedASUV, 2);
 
-            Vehicle fancyElectric = new Car("fancyElectric", "410POW", VehicleColors.Silver, VehicleTypes.Car, 3.ToList(), Car.CarBrand.Renualt);
+            Vehicle fancyElectric = new Car("fancyElectric", "410POW", VehicleColors.Silver, VehicleTypes.Car, 3.ToList(), Car.CarBrands.Renualt);
             hugeGarage.AddVehicle(fancyElectric, 3);
 
-            Vehicle rustyButWorking = new Car("rustyButWorking", "822YER", VehicleColors.Green, VehicleTypes.Car, 4.ToList(), Car.CarBrand.Toyota);
+            Vehicle rustyButWorking = new Car("rustyButWorking", "822YER", VehicleColors.Green, VehicleTypes.Car, 4.ToList(), Car.CarBrands.Toyota);
             hugeGarage.AddVehicle(rustyButWorking, 4);
 
             Vehicle schoolBus = new Bus("schoolBus", "123BUS", VehicleColors.Yellow, VehicleTypes.Bus, 5.ToList(), 30);
@@ -56,13 +56,13 @@ namespace CSharp_Garage_Task
         internal static Garage<Vehicle> SpacedGarage()
         {
             Garage<Vehicle> spacedGarage = new (12);
-            Vehicle fastCar = new Car("Wroom", "24", VehicleColors.Red, VehicleTypes.Car, 0.ToList(), Car.CarBrand.Porshe);
+            Vehicle fastCar = new Car("Wroom", "24", VehicleColors.Red, VehicleTypes.Car, 0.ToList(), Car.CarBrands.Porshe);
             spacedGarage.AddVehicle(fastCar, 0);
 
             Vehicle mcBike = new Motorcycle("mcBike", "994MCC", VehicleColors.Black, VehicleTypes.Motorcycle, 1.ToList(), 120);
             spacedGarage.AddVehicle(mcBike, 1);
 
-            Vehicle fancyElectric = new Car("fancyElectric", "410POW", VehicleColors.Silver, VehicleTypes.Car, 3.ToList(), Car.CarBrand.Renualt);
+            Vehicle fancyElectric = new Car("fancyElectric", "410POW", VehicleColors.Silver, VehicleTypes.Car, 3.ToList(), Car.CarBrands.Renualt);
             spacedGarage.AddVehicle(fancyElectric, 3);
 
             Vehicle coolerBike = new Motorcycle("coolerBike", "995WIN", VehicleColors.Silver, VehicleTypes.Motorcycle, 6.ToList(), 150);
@@ -72,7 +72,7 @@ namespace CSharp_Garage_Task
             Vehicle daPlane = new Airplane("daPlane", "000FLY", VehicleColors.Blue, VehicleTypes.Airplane, daPlaneSpaces, 500);
             spacedGarage.AddVehicle(daPlane, daPlaneSpaces);
 
-            Vehicle ohSeven = new Car("ohSeven", "007BON", VehicleColors.Silver, VehicleTypes.Car, 7.ToList(), Car.CarBrand.Saab);
+            Vehicle ohSeven = new Car("ohSeven", "007BON", VehicleColors.Silver, VehicleTypes.Car, 7.ToList(), Car.CarBrands.Saab);
             spacedGarage.AddVehicle(ohSeven, 7);
             return spacedGarage;
         }

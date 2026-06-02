@@ -6,7 +6,7 @@ namespace CSharp_Garage_Task.VehicleClasses
 {
     internal class Car : Vehicle
     {
-        public enum CarBrand
+        public enum CarBrands
         {
             Volvo,
             Saab,
@@ -18,9 +18,9 @@ namespace CSharp_Garage_Task.VehicleClasses
             Honda,
             Renualt
         }
-        public CarBrand Brand { get; private set; }
+        public CarBrands Brand { get; private set; }
         public static readonly int vehicleSize = 1;
-        public Car(string name, string registerID, VehicleColors color, VehicleTypes vehicleType, List<int> parkedNumber, CarBrand brand) : base(name, registerID, color, vehicleType, parkedNumber)
+        public Car(string name, string registerID, VehicleColors color, VehicleTypes vehicleType, List<int> parkedNumber, CarBrands brand) : base(name, registerID, color, vehicleType, parkedNumber)
         {
             pluralName = "Cars";
             Brand = brand;
@@ -32,9 +32,9 @@ namespace CSharp_Garage_Task.VehicleClasses
             return base.ToString(showSpaces) + " of car brand " + Brand;
         }
 
-        internal static CarBrand GetCarBrand()
+        internal static CarBrands GetCarBrand()
         {
-            foreach (CarBrand type in Enum.GetValues<CarBrand>())
+            foreach (CarBrands type in Enum.GetValues<CarBrands>())
             {
                 Helper.WriteMessage((int)type + ": " + type.ToString());
             }
@@ -42,11 +42,11 @@ namespace CSharp_Garage_Task.VehicleClasses
             {
                 Helper.WriteErrorMessage("Error, not a interger");
             }
-            if (!Enum.IsDefined(typeof(CarBrand), carBrandInt))
+            if (!Enum.IsDefined(typeof(CarBrands), carBrandInt))
             {
                 Helper.WriteErrorMessage("Invalid input, select a valid car brand.");
             }
-            return (CarBrand)carBrandInt;
+            return (CarBrands)carBrandInt;
         }
     }
 }

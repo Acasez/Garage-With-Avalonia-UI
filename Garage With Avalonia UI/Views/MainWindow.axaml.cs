@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using static CSharp_Garage_Task.VehicleClasses.Car;
 using static CSharp_Garage_Task.VehicleClasses.Vehicle;
 using Helper = CSharp_Garage_Task.Helper;
@@ -20,6 +22,7 @@ public partial class MainWindow : Window
 {
     GarageHandler handler = new();
     GridCreator gridCreator;
+    VehicleTypes currentVehicleType = VehicleTypes.Car;
 
     public MainWindow()
     {
@@ -64,6 +67,12 @@ public partial class MainWindow : Window
     {
         AddVehicleSetup.IsVisible = false;
         VehicleListGrid.IsVisible = false;
+
+        CarBrandChoice.IsVisible = false;
+        MCSpeed.IsVisible = false;
+        BoatSails.IsVisible = false;
+        PlaneHours.IsVisible = false;
+        BusCapacity.IsVisible = false;
     }
 
     private void Button_Add(object? sender, RoutedEventArgs e)
@@ -85,8 +94,43 @@ public partial class MainWindow : Window
         }
 
         VehicleType.SelectedIndex = VehicleType.Items.OfType<ComboBoxItem>().ToList().FindIndex(x => x.IsEnabled);
-
     }
+
+    private void SelectedVehicleType(object? sender, SelectionChangedEventArgs e)
+    {
+        Debug.WriteLine("Changing Vehicle type selection");
+        currentVehicleType = (VehicleTypes)VehicleType.SelectedIndex;
+
+        CarBrandChoice.IsVisible = false;
+        MCSpeed.IsVisible = false;
+        BoatSails.IsVisible = false;
+        PlaneHours.IsVisible = false;
+        BusCapacity.IsVisible = false;
+
+        switch (currentVehicleType)
+        {
+            case VehicleTypes.Car:
+                CarBrandChoice.IsVisible = true;
+                break;
+
+            case VehicleTypes.Motorcycle:
+                MCSpeed.IsVisible = true;
+                break;
+
+            case VehicleTypes.Boat:
+                BoatSails.IsVisible = true;
+                break;
+
+            case VehicleTypes.Airplane:
+                PlaneHours.IsVisible = true;
+                break;
+
+            case VehicleTypes.Bus:
+                BusCapacity.IsVisible = true;
+                break;
+        }
+    }
+
     private void Button_List(object? sender, RoutedEventArgs e)
     {
         HideSubmenues();
@@ -105,7 +149,7 @@ public partial class MainWindow : Window
     private void Button_Create(object? sender, RoutedEventArgs e) //Not quite done yet
     {
         List<int> largestEmptyLot = handler.GetLargestEmptyLot();
-        VehicleTypes vehicleType = (VehicleTypes)VehicleType.SelectedIndex;
+        currentVehicleType = (VehicleTypes)VehicleType.SelectedIndex;
         if (!Helper.TryGetStringFromAvalonia(VehicleName.Text, out string vehicleName))
         {
             Debug.WriteLine("Vehicle name cannot be null");
@@ -123,8 +167,8 @@ public partial class MainWindow : Window
         }
         VehicleColors vehicleColor = (VehicleColors)VehicleColor.SelectedIndex;
 
-        List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
-        Vehicle newVehicle = GetNewVehicle(vehicleType, vehicleName, vehicleID, vehicleColor, garageSpace);
+        List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(currentVehicleType));
+        Vehicle newVehicle = GetNewVehicle(currentVehicleType, vehicleName, vehicleID, vehicleColor, garageSpace);
         Debug.WriteLine("Creating vehicle with name " + vehicleName + " and ID " + vehicleID);
         handler.Garage.AddVehicle(newVehicle, garageSpace, true);
         HideSubmenues();
@@ -135,12 +179,20 @@ public partial class MainWindow : Window
         //TODO, don't hardcode specialvalues
         return vehicleType switch
         {
-            VehicleTypes.Car => new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, CarBrand.Volvo),
+            VehicleTypes.Car => new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, CarBrands.Volvo),
             VehicleTypes.Motorcycle => new Motorcycle(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 50),
             VehicleTypes.Boat => new Boat(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, false),
             VehicleTypes.Airplane => new Airplane(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 300),
             VehicleTypes.Bus => new Bus(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 25),
             _ => throw new NotImplementedException(),
         };
+    }
+
+    private void SelectedVehicleType(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+    }
+
+    private void SelectedVehicleType(object? sender, EventArgs e)
+    {
     }
 }
