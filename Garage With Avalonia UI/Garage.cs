@@ -44,16 +44,6 @@ namespace CSharp_Garage_Task
             return GetEnumerator();
         }
 
-        internal void AddVehicle(Vehicle vehicle, int space, bool log = false)
-        {
-            if (log)
-            {
-                Helper.WriteMessage("Added vehicle " + vehicle.ToString() + " to garage space " + space);
-            }
-            Vehicles[space] = vehicle;
-            ParkedVehicles ++;
-        }
-
         internal void AddVehicle(Vehicle vehicle, List<int> spaces, bool log = false)
         {
             if (log)
