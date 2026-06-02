@@ -22,7 +22,7 @@ namespace CSharp_Garage_Task.VehicleClasses
         }
         public override string GetSpecialValue()
         {
-            return FlightHours.ToString();
+            return "Flight Hours: " + FlightHours.ToString();
         }
     }
 }

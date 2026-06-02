@@ -22,7 +22,7 @@ namespace CSharp_Garage_Task.VehicleClasses
         }
         public override string GetSpecialValue()
         {
-            return Sail.ToString();
+            return "Has " + (Sail ? " sails" : " no sails");
         }
     }
 }

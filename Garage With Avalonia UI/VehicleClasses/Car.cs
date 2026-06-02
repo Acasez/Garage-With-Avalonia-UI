@@ -34,7 +34,7 @@ namespace CSharp_Garage_Task.VehicleClasses
 
         public override string GetSpecialValue()
         {
-            return Brand.ToString();
+            return "Car Brand: " + Brand.ToString();
         }
     }
 }

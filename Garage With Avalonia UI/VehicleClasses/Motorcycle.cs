@@ -23,7 +23,7 @@ namespace CSharp_Garage_Task.VehicleClasses
 
         public override string GetSpecialValue()
         {
-            return TopSpeed.ToString();
+            return "Top Speed: " + TopSpeed.ToString();
         }
     }
 }

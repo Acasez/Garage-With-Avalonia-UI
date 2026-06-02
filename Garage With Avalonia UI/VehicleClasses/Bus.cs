@@ -21,7 +21,7 @@ namespace CSharp_Garage_Task.VehicleClasses
         }
         public override string GetSpecialValue()
         {
-            return Capacity.ToString();
+            return "Capacity: " + Capacity.ToString();
         }
     }
 }
