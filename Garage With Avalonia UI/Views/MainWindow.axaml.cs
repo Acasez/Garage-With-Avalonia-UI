@@ -23,6 +23,7 @@ public partial class MainWindow : Window
     GarageHandler handler = new();
     GridCreator gridCreator;
     VehicleTypes currentVehicleType = VehicleTypes.Car;
+    bool canChangeType = false;
 
     public MainWindow()
     {
@@ -68,7 +69,7 @@ public partial class MainWindow : Window
         AddVehicleSetup.IsVisible = false;
         VehicleListGrid.IsVisible = false;
 
-        CarBrandChoice.IsVisible = false;
+        CarBrand.IsVisible = false;
         MCSpeed.IsVisible = false;
         BoatSails.IsVisible = false;
         PlaneHours.IsVisible = false;
@@ -92,16 +93,24 @@ public partial class MainWindow : Window
                 item.IsEnabled = fittingVehicles.Contains(vehicleType);
             }
         }
-
+        canChangeType = true;
         VehicleType.SelectedIndex = VehicleType.Items.OfType<ComboBoxItem>().ToList().FindIndex(x => x.IsEnabled);
     }
 
     private void SelectedVehicleType(object? sender, SelectionChangedEventArgs e)
     {
         Debug.WriteLine("Changing Vehicle type selection");
+        if (canChangeType)
+        {
+            SetSpecificChoiceVisible();
+        }
+    }
+
+    public void SetSpecificChoiceVisible()
+    {
         currentVehicleType = (VehicleTypes)VehicleType.SelectedIndex;
 
-        CarBrandChoice.IsVisible = false;
+        CarBrand.IsVisible = false;
         MCSpeed.IsVisible = false;
         BoatSails.IsVisible = false;
         PlaneHours.IsVisible = false;
@@ -110,7 +119,7 @@ public partial class MainWindow : Window
         switch (currentVehicleType)
         {
             case VehicleTypes.Car:
-                CarBrandChoice.IsVisible = true;
+                CarBrand.IsVisible = true;
                 break;
 
             case VehicleTypes.Motorcycle:
@@ -174,25 +183,48 @@ public partial class MainWindow : Window
         HideSubmenues();
     }
 
-    private static Vehicle GetNewVehicle(VehicleTypes vehicleType, string vehicleName, string vehicleID, VehicleColors vehicleColor, List<int> garageSpace)
+    private Vehicle GetNewVehicle(VehicleTypes vehicleType, string vehicleName, string vehicleID, VehicleColors vehicleColor, List<int> garageSpace)
     {
         //TODO, don't hardcode specialvalues
         return vehicleType switch
         {
-            VehicleTypes.Car => new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, CarBrands.Volvo),
-            VehicleTypes.Motorcycle => new Motorcycle(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 50),
-            VehicleTypes.Boat => new Boat(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, false),
-            VehicleTypes.Airplane => new Airplane(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 300),
-            VehicleTypes.Bus => new Bus(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, 25),
+            VehicleTypes.Car => new Car(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, GetCarBrand()),
+            VehicleTypes.Motorcycle => new Motorcycle(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, GetMCSpeed()),
+            VehicleTypes.Boat => new Boat(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, GetSails()),
+            VehicleTypes.Airplane => new Airplane(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, GetPlaneHours()),
+            VehicleTypes.Bus => new Bus(vehicleName, vehicleID, vehicleColor, vehicleType, garageSpace, GetBusCapacity()),
             _ => throw new NotImplementedException(),
         };
     }
 
-    private void SelectedVehicleType(object? sender, AvaloniaPropertyChangedEventArgs e)
+    private int GetBusCapacity()
     {
+        if (int.TryParse(BusCapacity.Text, out int capacity))
+            return capacity;
+        return 0;
     }
 
-    private void SelectedVehicleType(object? sender, EventArgs e)
+    private int GetPlaneHours()
     {
+        if (int.TryParse(PlaneHours.Text, out int hours))
+            return hours;
+        return 0;
+    }
+
+    private bool GetSails()
+    {
+        return BoatSails.IsPressed;
+    }
+
+    private CarBrands GetCarBrand()
+    {
+        return (CarBrands)CarBrand.SelectedIndex;
+    }
+
+    private int GetMCSpeed()
+    {
+        if (int.TryParse(MCSpeed.Text, out int speed))
+            return speed;
+        return 0;
     }
 }

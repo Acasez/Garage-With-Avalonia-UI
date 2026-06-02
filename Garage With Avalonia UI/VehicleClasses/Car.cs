@@ -31,22 +31,5 @@ namespace CSharp_Garage_Task.VehicleClasses
         {
             return base.ToString(showSpaces) + " of car brand " + Brand;
         }
-
-        internal static CarBrands GetCarBrand()
-        {
-            foreach (CarBrands type in Enum.GetValues<CarBrands>())
-            {
-                Helper.WriteMessage((int)type + ": " + type.ToString());
-            }
-            if (!int.TryParse(Console.ReadLine(), out int carBrandInt))
-            {
-                Helper.WriteErrorMessage("Error, not a interger");
-            }
-            if (!Enum.IsDefined(typeof(CarBrands), carBrandInt))
-            {
-                Helper.WriteErrorMessage("Invalid input, select a valid car brand.");
-            }
-            return (CarBrands)carBrandInt;
-        }
     }
 }

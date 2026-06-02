@@ -46,7 +46,7 @@
         <StackPanel Name="AddVehicleSetup" IsVisible="False">
             <TextBlock Name="VehicleSpaces" HorizontalAlignment="Center"/>
             <StackPanel Name="VehicleInputs" Orientation="Horizontal">
-                <ComboBox  SelectionChanged="SelectedVehicleType" Name="VehicleType" SelectedIndex="0">
+                <ComboBox SelectionChanged="SelectedVehicleType" Name="VehicleType" SelectedIndex="0">
                     <ComboBoxItem>Car</ComboBoxItem>
                     <ComboBoxItem>Motorcycle</ComboBoxItem>
                     <ComboBoxItem>Boat</ComboBoxItem>
@@ -65,7 +65,7 @@
                     <ComboBoxItem><TextBlock Background="Yellow">Yellow</TextBlock></ComboBoxItem>
                 </ComboBox>
 
-                <ComboBox Name="CarBrandChoice" SelectedIndex="0">
+                <ComboBox Name="CarBrand" SelectedIndex="0">
                     <ComboBoxItem>Volvo</ComboBoxItem>
                     <ComboBoxItem>Saab</ComboBoxItem>
                     <ComboBoxItem>Porshe</ComboBoxItem>
