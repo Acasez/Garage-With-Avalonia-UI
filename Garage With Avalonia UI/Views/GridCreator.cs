@@ -16,13 +16,13 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
     private enum SortableColumn { Spaces, Type, Color, Name, ID }
     private readonly GarageHandler handler = handlerRef;
     private readonly StackPanel vehicleListGrid = vehicleListGridRef;
-    private const int gridColumns = 6;
-    private static readonly string[] Headers = { "Spaces", "Type", "Color", "Name", "ID", "Remove" };
+    private const int gridColumns = 7;
+    private static readonly string[] Headers = { "Spaces", "Type", "Color", "Name", "ID", "Special", "Remove" };
 
     private class DisplayRow
     {
         public bool IsEmpty { get; set; }
-        public string[] Cells { get; set; } = new string[6]; // Spaces, Type, Color, Name, ID, RemoveButton
+        public string[] Cells { get; set; } = new string[7]; // Spaces, Type, Color, Name, ID, RemoveButton
         public Vehicle? Vehicle { get; set; }
     }
 
@@ -69,7 +69,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                 displayRows.Add(new DisplayRow
                 {
                     IsEmpty = true,
-                    Cells = [currentNullSpaces.ToCustomString(), "", "", "No vehicles parked"]
+                    Cells = [currentNullSpaces.ToCustomString(), "", "", "", "", "No vehicles parked"]
                 });
                 currentNullSpaces.Clear();
             }
@@ -88,7 +88,8 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                         vehicle.VehicleType.ToString(),
                         vehicle.Color.ToString(),
                         vehicle.Name,
-                        vehicle.RegisterID
+                        vehicle.RegisterID,
+                        vehicle.GetSpecialValue()
                     ]
                 });
             }
@@ -106,7 +107,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             displayRows.Add(new DisplayRow
             {
                 IsEmpty = true,
-                Cells = [currentNullSpaces.ToCustomString(), "", "", "", "No vehicles parked"]
+                Cells = [currentNullSpaces.ToCustomString(), "", "", "", "", "No vehicles parked"]
             });
         }
 
@@ -126,7 +127,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             {
                 var txt = new TextBlock
                 {
-                    Text = $"{row.Cells[0]} - {row.Cells[3]}",
+                    Text = $"{row.Cells[0]} - {row.Cells[5]}",
                     Margin = new Thickness(5)
                 };
                 Grid.SetRow(txt, rowIdx + 1);
@@ -135,7 +136,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             }
             else
             {
-                for (int col = 0; col < 5; col++)
+                for (int col = 0; col < gridColumns - 1; col++)
                 {
                     var txt = new TextBlock
                     {
@@ -158,7 +159,7 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
                 deleteButton.Click += DeleteButton_Click;
 
                 Grid.SetRow(deleteButton, rowIdx + 1);
-                Grid.SetColumn(deleteButton, 5);
+                Grid.SetColumn(deleteButton, gridColumns);
                 grid.Children.Add(deleteButton);
             }
         }
