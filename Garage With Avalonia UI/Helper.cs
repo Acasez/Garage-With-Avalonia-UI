@@ -140,13 +140,12 @@ namespace CSharp_Garage_Task
         public static bool TryGetStringFromAvalonia(string input, out string result)
         {
             result = "";
-
             if (string.IsNullOrWhiteSpace(input))
             {
                 WriteErrorMessage("Invalid input, try again");
                 return false;
             }
-
+            result = input;
             return true;
         }
 

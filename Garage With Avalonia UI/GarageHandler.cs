@@ -184,12 +184,7 @@ namespace CSharp_Garage_Task
                 bool remove = Helper.GetBoolFromInput();
                 if (remove)
                 {
-                    Helper.WriteMessage("Removed vehicle " + vehicle.ToString(false), ConsoleColor.Yellow);
-                    foreach (int newFreeSpace in vehicle.parkSpacesOccupied)
-                    {
-                        Garage.Vehicles[newFreeSpace] = null;
-                    }
-                    Garage.ParkedVehicles--;
+                    RemoveVehicle(vehicle);
                 }
                 else if (remove)
                 {
@@ -201,6 +196,16 @@ namespace CSharp_Garage_Task
             {
                 Helper.WriteWarningMessage("Couldn't find vehicle witht that ID");
             }
+        }
+
+        public void RemoveVehicle(Vehicle vehicle)
+        {
+            Helper.WriteMessage("Removed vehicle " + vehicle.ToString(false), ConsoleColor.Yellow);
+            foreach (int newFreeSpace in vehicle.parkSpacesOccupied)
+            {
+                Garage.Vehicles[newFreeSpace] = null;
+            }
+            Garage.ParkedVehicles--;
         }
 
         public void ListVehiclesTypes()

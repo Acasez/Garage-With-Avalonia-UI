@@ -16,13 +16,14 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
     private enum SortableColumn { Spaces, Type, Color, Name, ID }
     private readonly GarageHandler handler = handlerRef;
     private readonly StackPanel vehicleListGrid = vehicleListGridRef;
-    private const int gridColumns = 5;
-    private static readonly string[] Headers = { "Spaces", "Type", "Color", "Name", "ID" };
+    private const int gridColumns = 6;
+    private static readonly string[] Headers = { "Spaces", "Type", "Color", "Name", "ID", "Remove" };
 
     private class DisplayRow
     {
         public bool IsEmpty { get; set; }
-        public string[] Cells { get; set; } = new string[5]; // Spaces, Type, Color, Name, ID
+        public string[] Cells { get; set; } = new string[6]; // Spaces, Type, Color, Name, ID, RemoveButton
+        public Vehicle? Vehicle { get; set; }
     }
 
     internal Grid CreateGarageGrid()
@@ -76,16 +77,19 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             // Add vehicle
             if (handler.Garage.Vehicles[i] != null)
             {
-                var v = handler.Garage.Vehicles[i];
+                Vehicle vehicle = handler.Garage.Vehicles[i];
                 displayRows.Add(new DisplayRow
                 {
                     IsEmpty = false,
-                    Cells = 
-                    [v.parkSpacesOccupied.ToCustomString(),
-                    v.VehicleType.ToString(),
-                    v.Color.ToString(),
-                    v.Name,
-                    v.RegisterID]
+                    Vehicle = vehicle,
+                    Cells =
+                    [
+                        vehicle.parkSpacesOccupied.ToCustomString(),
+                        vehicle.VehicleType.ToString(),
+                        vehicle.Color.ToString(),
+                        vehicle.Name,
+                        vehicle.RegisterID
+                    ]
                 });
             }
             else
@@ -131,17 +135,48 @@ internal class GridCreator(GarageHandler handlerRef, StackPanel vehicleListGridR
             }
             else
             {
-                for (int col = 0; col < gridColumns; col++)
+                for (int col = 0; col < 5; col++)
                 {
-                    var txt = new TextBlock { Text = row.Cells[col], Margin = new Thickness(5) };
+                    var txt = new TextBlock
+                    {
+                        Text = row.Cells[col],
+                        Margin = new Thickness(5)
+                    };
+
                     Grid.SetRow(txt, rowIdx + 1);
                     Grid.SetColumn(txt, col);
                     grid.Children.Add(txt);
                 }
+
+                var deleteButton = new Button
+                {
+                    Content = "Delete",
+                    Tag = row.Vehicle,
+                    Margin = new Thickness(5)
+                };
+
+                deleteButton.Click += DeleteButton_Click;
+
+                Grid.SetRow(deleteButton, rowIdx + 1);
+                Grid.SetColumn(deleteButton, 5);
+                grid.Children.Add(deleteButton);
             }
         }
 
         return grid;
+    }
+
+    private void DeleteButton_Click(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button &&
+            button.Tag is Vehicle vehicle)
+        {
+            // Your existing deletion code here
+            handler.RemoveVehicle(vehicle);
+
+            vehicleListGrid.Children.Clear();
+            vehicleListGrid.Children.Add(CreateGarageGrid());
+        }
     }
 
     private void SortButton_Click(object sender, RoutedEventArgs e)

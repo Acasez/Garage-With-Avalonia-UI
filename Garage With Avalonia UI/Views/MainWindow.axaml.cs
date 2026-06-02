@@ -120,7 +120,7 @@ public partial class MainWindow : Window
 
         List<int> garageSpace = largestEmptyLot.GetRange(0, IHandler.GetSizeOfVehicle(vehicleType));
         Vehicle newVehicle = GetNewVehicle(vehicleType, vehicleName, vehicleID, vehicleColor, garageSpace);
-
+        Debug.WriteLine("Creating vehicle with name " + vehicleName + " and ID " + vehicleID);
         handler.Garage.AddVehicle(newVehicle, garageSpace, true);
         HideSubmenues();
     }
