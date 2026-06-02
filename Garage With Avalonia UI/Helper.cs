@@ -15,13 +15,6 @@ namespace CSharp_Garage_Task
             Console.ResetColor();
         }
 
-        public static void WriteWarningMessage(string warningText)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(warningText);
-            Console.ResetColor();
-        }
-
         public static void WriteMessage(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -31,13 +24,6 @@ namespace CSharp_Garage_Task
         public static void WriteMessage(string text)
         {
             WriteMessage(text, ConsoleColor.White);
-        }
-
-        public static void WriteMessageOnLine(string text)
-        {
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(text);
-            Console.ResetColor();
         }
 
         public static bool TryGetIntFromAvalonia(string input, int min, int max, out int result)
