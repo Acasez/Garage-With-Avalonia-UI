@@ -53,8 +53,8 @@ namespace CSharp_Garage_Task
             foreach (int space in spaces)
             {
                 Vehicles[space] = vehicle;
+                ParkedVehicles++;
             }
-            ParkedVehicles++;
         }
 
     }

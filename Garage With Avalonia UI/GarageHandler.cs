@@ -80,11 +80,6 @@ namespace CSharp_Garage_Task
             }
         }
 
-        public Vehicle GetFirstVehicle()
-        {
-            return (Vehicle)Garage.Take(1);
-        }
-
         public bool CheckForGarageSpace()
         {
             if (Garage.GarageCapacity > Garage.ParkedVehicles)

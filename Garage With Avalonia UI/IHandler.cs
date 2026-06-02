@@ -14,8 +14,6 @@ internal interface IHandler
     bool CheckForGarageSpace();
     List<int> GetLargestEmptyLot();
 
-    Vehicle GetFirstVehicle();
-
     internal static List<VehicleTypes> GetFittingVehicles(int sizeLimit = 5)
     {
         List<VehicleTypes> nonFittingVehicles = [];

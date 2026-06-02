@@ -78,6 +78,11 @@ public partial class MainWindow : Window
 
     private void Button_Add(object? sender, RoutedEventArgs e)
     {
+        if (handler.CheckForGarageSpace() == false)
+        {
+            Debug.WriteLine("No space in garage");
+            return;
+        }
         HideSubmenues();
         Debug.WriteLine("Adding vehicle");
         AddVehicleSetup.IsVisible = true;
